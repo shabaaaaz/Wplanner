@@ -1,0 +1,75 @@
+ <!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Workout Planner</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;700&family=Manrope:wght@400;500;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <button id="themeToggle" type="button">
+    <span id="themeIcon">🌙</span>
+    <span id="themeText">Dark Mode</span>
+  </button>
+
+  <main class="app">
+    <header class="hero">
+      <div>
+        <p class="eyebrow">Weekly Fitness Planner</p>
+        <h1>Plan your workouts for the week</h1>
+        <p class="subtitle">
+          Add workouts, mark them complete, and delete them anytime.
+          Your data is saved in localStorage.
+        </p>
+      </div>
+
+      <section class="stats" aria-label="Workout stats">
+        <div class="stat-box">
+          <span>Total</span>
+          <strong id="totalCount">0</strong>
+        </div>
+        <div class="stat-box">
+          <span>Completed</span>
+          <strong id="completedCount">0</strong>
+        </div>
+        <div class="stat-box">
+          <span>Progress</span>
+          <strong id="progressCount">0%</strong>
+        </div>
+      </section>
+    </header>
+
+    <section class="controls" aria-label="Add workout">
+      <div class="field">
+        <label for="workoutName">Workout Name</label>
+        <input
+          id="workoutName"
+          type="text"
+          placeholder="e.g. Chest Day, Run, Yoga"
+        />
+      </div>
+
+      <div class="field">
+        <label for="daySelect">Day</label>
+        <select id="daySelect"></select>
+      </div>
+
+      <button id="addWorkoutBtn" type="button">Add Workout</button>
+    </section>
+
+    <section class="board-section">
+      <div class="board-header">
+        <h2>Weekly Board</h2>
+        <p>Click a workout to toggle completion. Use delete to remove it.</p>
+      </div>
+
+      <div class="days" id="days"></div>
+    </section>
+  </main>
+
+  <script src="script.js"></script>
+</body>
+</html>
