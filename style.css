@@ -214,6 +214,12 @@ select:focus {
   gap: 14px;
   overflow-x: auto;
   padding-bottom: 6px;
+  scroll-snap-type: x proximity;
+  -webkit-overflow-scrolling: touch;
+}
+
+.day {
+  scroll-snap-align: start;
 }
 
 .day {
@@ -376,6 +382,13 @@ select:focus {
   filter: brightness(0.96);
 }
 
+@media (max-width: 1080px) {
+  .days {
+    grid-template-columns: repeat(7, minmax(138px, 1fr));
+    gap: 10px;
+  }
+}
+
 @media (max-width: 980px) {
   .hero {
     grid-template-columns: 1fr;
@@ -417,5 +430,61 @@ select:focus {
 
   .day {
     min-height: auto;
+  }
+
+  /* The theme toggle is fixed/floating, so give the hero enough
+     top clearance that its text never renders underneath it. */
+  .hero {
+    padding-top: 68px;
+  }
+
+  #themeToggle {
+    top: 12px;
+    right: 12px;
+    padding: 10px 12px;
+  }
+
+  /* Icon-only on small screens: keeps the button compact and out
+     of the way of the heading text next to it. */
+  #themeToggle #themeText {
+    display: none;
+  }
+
+  /* Bigger touch targets — 22px/38px are too small to tap reliably
+     with a thumb; bump toward the ~44px comfortable minimum. */
+  .toggle-btn {
+    width: 30px;
+    height: 30px;
+  }
+
+  .delete-btn {
+    width: 44px;
+    height: 44px;
+  }
+
+  /* Explicit 16px prevents iOS Safari from auto-zooming the page
+     when an input is focused. */
+  input,
+  select {
+    font-size: 16px;
+  }
+
+  .undo-toast {
+    left: 16px;
+    right: 16px;
+    bottom: 16px;
+    transform: translateY(20px);
+    flex-wrap: wrap;
+  }
+
+  .undo-toast.visible {
+    transform: translateY(0);
+  }
+
+  .undo-toast-message {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    max-width: 65vw;
   }
 }
