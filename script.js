@@ -14,6 +14,7 @@ const daysContainer = document.getElementById("days");
 const workoutNameInput = document.getElementById("workoutName");
 const daySelect = document.getElementById("daySelect");
 const addWorkoutBtn = document.getElementById("addWorkoutBtn");
+const resetWeekBtn = document.getElementById("resetWeekBtn");
 const themeToggle = document.getElementById("themeToggle");
 const themeIcon = document.getElementById("themeIcon");
 const themeText = document.getElementById("themeText");
@@ -23,6 +24,7 @@ const themeText = document.getElementById("themeText");
 const UNDO_TIMEOUT_MS = 6000;
 let pendingUndo = null; // { workout, index, timeoutId }
 let toastEl = null;
+let editingId = null; // id of the workout currently being renamed inline
 
 function initDayOptions() {
   daySelect.innerHTML = "";
@@ -76,6 +78,50 @@ function toggleWorkout(id) {
     return workout;
   });
 
+  saveWorkouts();
+  render();
+}
+
+function startEditing(id) {
+  editingId = id;
+  render();
+}
+
+function renameWorkout(id, newName) {
+  const trimmed = newName.trim();
+
+  workouts = workouts.map((workout) => {
+    if (workout.id === id) {
+      return {
+        ...workout,
+        name: trimmed || workout.name
+      };
+    }
+    return workout;
+  });
+
+  editingId = null;
+  saveWorkouts();
+  render();
+}
+
+function cancelEditing() {
+  editingId = null;
+  render();
+}
+
+function resetWeek() {
+  if (workouts.length === 0) return;
+
+  const anyCompleted = workouts.some((workout) => workout.done);
+  if (!anyCompleted) return;
+
+  const confirmed = window.confirm(
+    "Reset the week? This will mark every workout as not done again (workouts themselves stay)."
+  );
+  if (!confirmed) return;
+
+  workouts = workouts.map((workout) => ({ ...workout, done: false }));
   saveWorkouts();
   render();
 }
@@ -203,11 +249,53 @@ function render() {
         toggleBtn.setAttribute("aria-label", "Toggle workout completion");
         toggleBtn.addEventListener("click", () => toggleWorkout(workout.id));
 
-        const nameBtn = document.createElement("button");
-        nameBtn.className = "workout-name-btn";
-        nameBtn.type = "button";
-        nameBtn.textContent = workout.name;
-        nameBtn.addEventListener("click", () => toggleWorkout(workout.id));
+        item.appendChild(toggleBtn);
+
+        if (editingId === workout.id) {
+          const editInput = document.createElement("input");
+          editInput.type = "text";
+          editInput.className = "workout-edit-input";
+          editInput.value = workout.name;
+
+          editInput.addEventListener("keydown", (event) => {
+            if (event.key === "Enter") {
+              renameWorkout(workout.id, editInput.value);
+            } else if (event.key === "Escape") {
+              cancelEditing();
+            }
+          });
+          editInput.addEventListener("blur", () => {
+            renameWorkout(workout.id, editInput.value);
+          });
+
+          item.appendChild(editInput);
+
+          // Focus + select after it's actually in the DOM.
+          requestAnimationFrame(() => {
+            editInput.focus();
+            editInput.select();
+          });
+        } else {
+          const nameBtn = document.createElement("button");
+          nameBtn.className = "workout-name-btn";
+          nameBtn.type = "button";
+          nameBtn.textContent = workout.name;
+          nameBtn.addEventListener("click", () => toggleWorkout(workout.id));
+          nameBtn.addEventListener("dblclick", (event) => {
+            event.stopPropagation();
+            startEditing(workout.id);
+          });
+
+          const editBtn = document.createElement("button");
+          editBtn.className = "edit-btn";
+          editBtn.type = "button";
+          editBtn.textContent = "✎";
+          editBtn.setAttribute("aria-label", `Edit ${workout.name}`);
+          editBtn.addEventListener("click", () => startEditing(workout.id));
+
+          item.appendChild(nameBtn);
+          item.appendChild(editBtn);
+        }
 
         const deleteBtn = document.createElement("button");
         deleteBtn.className = "delete-btn";
@@ -216,8 +304,6 @@ function render() {
         deleteBtn.setAttribute("aria-label", `Delete ${workout.name}`);
         deleteBtn.addEventListener("click", () => deleteWorkout(workout.id));
 
-        item.appendChild(toggleBtn);
-        item.appendChild(nameBtn);
         item.appendChild(deleteBtn);
         list.appendChild(item);
       });
@@ -263,6 +349,7 @@ function toggleTheme() {
 }
 
 addWorkoutBtn.addEventListener("click", addWorkout);
+resetWeekBtn.addEventListener("click", resetWeek);
 themeToggle.addEventListener("click", toggleTheme);
 
 workoutNameInput.addEventListener("keydown", (event) => {

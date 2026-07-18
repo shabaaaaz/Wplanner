@@ -1,41 +1,47 @@
 :root {
-  --bg: #f5f3ec;
-  --bg-accent-1: rgba(156, 204, 167, 0.25);
-  --bg-accent-2: rgba(233, 191, 112, 0.14);
-  --surface: rgba(255, 255, 255, 0.82);
+  --bg: #f6f5f0;
+  --bg-accent-1: rgba(31, 143, 99, 0.16);
+  --bg-accent-2: rgba(231, 163, 62, 0.14);
+  --surface: rgba(255, 255, 255, 0.86);
   --surface-solid: #ffffff;
-  --text: #18342a;
-  --muted: #66756f;
-  --line: rgba(24, 52, 42, 0.12);
-  --primary: #245c45;
-  --primary-soft: #dcefe2;
-  --danger: #b84b4b;
-  --danger-soft: #f8e1e1;
-  --done: #8b948f;
-  --shadow: 0 20px 50px rgba(30, 50, 40, 0.12);
-  --input-bg: rgba(255, 255, 255, 0.88);
-  --workout-bg: linear-gradient(180deg, rgba(220, 239, 226, 0.95), rgba(220, 239, 226, 0.72));
-  --workout-done-bg: linear-gradient(180deg, rgba(219, 219, 219, 0.75), rgba(231, 231, 231, 0.9));
+  --text: #17231f;
+  --muted: #5b6b64;
+  --line: rgba(23, 35, 31, 0.10);
+  --primary: #1f8f63;
+  --primary-strong: #146b4a;
+  --primary-soft: #d9f2e6;
+  --accent: #e7a33e;
+  --accent-soft: #fbead2;
+  --danger: #c2483f;
+  --danger-soft: #f9e2e0;
+  --done: #93a29b;
+  --shadow: 0 18px 44px rgba(20, 40, 32, 0.10);
+  --input-bg: rgba(255, 255, 255, 0.92);
+  --workout-bg: linear-gradient(180deg, rgba(217, 242, 230, 0.95), rgba(217, 242, 230, 0.68));
+  --workout-done-bg: linear-gradient(180deg, rgba(226, 226, 221, 0.75), rgba(233, 233, 228, 0.9));
 }
 
 body.dark {
-  --bg: #0f1512;
-  --bg-accent-1: rgba(113, 199, 154, 0.10);
-  --bg-accent-2: rgba(255, 255, 255, 0.04);
-  --surface: rgba(24, 27, 30, 0.92);
-  --surface-solid: #1a1d21;
-  --text: #f2f5f7;
-  --muted: #9aa3ab;
+  --bg: #0d1310;
+  --bg-accent-1: rgba(82, 215, 160, 0.10);
+  --bg-accent-2: rgba(231, 163, 62, 0.07);
+  --surface: rgba(19, 23, 21, 0.92);
+  --surface-solid: #161b19;
+  --text: #edf3f0;
+  --muted: #9db0a7;
   --line: rgba(255, 255, 255, 0.08);
-  --primary: #7fb8ff;
-  --primary-soft: rgba(127, 184, 255, 0.14);
-  --danger: #ff8f8f;
-  --danger-soft: rgba(255, 143, 143, 0.14);
-  --done: #8f98a1;
-  --shadow: 0 22px 55px rgba(0, 0, 0, 0.4);
-  --input-bg: rgba(255, 255, 255, 0.04);
-  --workout-bg: linear-gradient(180deg, rgba(127, 184, 255, 0.12), rgba(127, 184, 255, 0.08));
-  --workout-done-bg: linear-gradient(180deg, rgba(143, 152, 161, 0.14), rgba(143, 152, 161, 0.08));
+  --primary: #52d7a0;
+  --primary-strong: #2fae7d;
+  --primary-soft: rgba(82, 215, 160, 0.14);
+  --accent: #e7a33e;
+  --accent-soft: rgba(231, 163, 62, 0.14);
+  --danger: #ff8f80;
+  --danger-soft: rgba(255, 143, 128, 0.14);
+  --done: #8b9a92;
+  --shadow: 0 20px 52px rgba(0, 0, 0, 0.42);
+  --input-bg: rgba(255, 255, 255, 0.05);
+  --workout-bg: linear-gradient(180deg, rgba(82, 215, 160, 0.14), rgba(82, 215, 160, 0.08));
+  --workout-done-bg: linear-gradient(180deg, rgba(139, 154, 146, 0.14), rgba(139, 154, 146, 0.08));
 }
 
 * {
@@ -72,21 +78,21 @@ body {
 }
 
 .app {
-  max-width: 1250px;
+  max-width: 1160px;
   margin: 0 auto;
   background: var(--surface);
   backdrop-filter: blur(14px);
   border: 1px solid var(--line);
-  border-radius: 30px;
+  border-radius: 28px;
   box-shadow: var(--shadow);
   overflow: hidden;
 }
 
 .hero {
   display: grid;
-  grid-template-columns: 1.3fr 0.9fr;
-  gap: 24px;
-  padding: 36px;
+  grid-template-columns: 1.35fr 0.85fr;
+  gap: 20px;
+  padding: 32px;
   border-bottom: 1px solid var(--line);
 }
 
@@ -110,11 +116,17 @@ h1 {
 
 }
 
+.stats {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
 .stat-box {
   background: var(--surface-solid);
   border: 1px solid var(--line);
-  border-radius: 22px;
-  padding: 18px;
+  border-radius: 18px;
+  padding: 14px 16px;
 }
 
 .stat-box span {
@@ -135,8 +147,8 @@ h1 {
 .controls {
   display: grid;
   grid-template-columns: 1.2fr 0.8fr auto;
-  gap: 14px;
-  padding: 28px 36px;
+  gap: 12px;
+  padding: 24px 32px;
   border-bottom: 1px solid var(--line);
 }
 
@@ -173,8 +185,8 @@ select {
 
 input:focus,
 select:focus {
-  border-color: rgba(36, 92, 69, 0.45);
-  box-shadow: 0 0 0 4px rgba(36, 92, 69, 0.08);
+  border-color: rgba(31, 143, 99, 0.45);
+  box-shadow: 0 0 0 4px rgba(31, 143, 99, 0.08);
 }
 
 #addWorkoutBtn {
@@ -182,12 +194,12 @@ select:focus {
   padding: 15px 22px;
   border: none;
   border-radius: 18px;
-  background: linear-gradient(135deg, var(--primary), #2f7256);
+  background: linear-gradient(135deg, var(--primary), var(--primary-strong));
   color: white;
   font-weight: 800;
   cursor: pointer;
   transition: transform 0.18s ease, box-shadow 0.18s ease;
-  box-shadow: 0 12px 28px rgba(36, 92, 69, 0.22);
+  box-shadow: 0 12px 28px rgba(31, 143, 99, 0.22);
 }
 
 #addWorkoutBtn:hover {
@@ -195,23 +207,49 @@ select:focus {
 }
 
 .board-section {
-  padding: 28px 36px 36px;
+  padding: 24px 32px 32px;
+}
+
+.board-header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 16px;
+  margin-bottom: 4px;
 }
 
 .board-header h2 {
   margin: 0 0 6px;
-  font-size: clamp(1.4rem, 2vw, 2rem);
+  font-size: clamp(1.35rem, 2vw, 1.85rem);
 }
 
 .board-header p {
-  margin: 0 0 18px;
+  margin: 0;
   color: var(--muted);
+  max-width: 46ch;
+}
+
+.reset-btn {
+  flex-shrink: 0;
+  border: 1px solid var(--line);
+  background: var(--accent-soft);
+  color: var(--accent);
+  font-weight: 800;
+  padding: 11px 18px;
+  border-radius: 14px;
+  cursor: pointer;
+  white-space: nowrap;
+}
+
+.reset-btn:hover {
+  filter: brightness(0.97);
 }
 
 .days {
   display: grid;
   grid-template-columns: repeat(7, minmax(170px, 1fr));
   gap: 14px;
+  margin-top: 20px;
   overflow-x: auto;
   padding-bottom: 6px;
   scroll-snap-type: x proximity;
@@ -265,9 +303,9 @@ select:focus {
 
 .workout {
   display: grid;
-  grid-template-columns: auto 1fr auto;
+  grid-template-columns: auto 1fr auto auto;
   align-items: center;
-  gap: 10px;
+  gap: 8px;
   padding: 12px;
   border-radius: 16px;
   background: var(--workout-bg);
@@ -282,7 +320,7 @@ select:focus {
   width: 22px;
   height: 22px;
   border-radius: 50%;
-  border: 2px solid rgba(36, 92, 69, 0.5);
+  border: 2px solid rgba(31, 143, 99, 0.5);
   background: white;
   cursor: pointer;
   position: relative;
@@ -320,13 +358,43 @@ select:focus {
   text-decoration: line-through;
 }
 
+.edit-btn {
+  border: none;
+  background: transparent;
+  color: var(--muted);
+  border-radius: 10px;
+  width: 30px;
+  height: 30px;
+  cursor: pointer;
+  font-size: 0.95rem;
+  display: grid;
+  place-items: center;
+}
+
+.edit-btn:hover {
+  background: var(--primary-soft);
+  color: var(--primary);
+}
+
+.workout-edit-input {
+  width: 100%;
+  padding: 6px 10px;
+  border: 1px solid var(--primary);
+  border-radius: 10px;
+  background: var(--surface-solid);
+  color: var(--text);
+  font-weight: 700;
+  font: inherit;
+  outline: none;
+}
+
 .delete-btn {
   border: none;
   background: var(--danger-soft);
   color: var(--danger);
   border-radius: 12px;
-  width: 38px;
-  height: 38px;
+  width: 36px;
+  height: 36px;
   cursor: pointer;
   font-weight: 800;
 }
@@ -335,6 +403,23 @@ select:focus {
   color: var(--muted);
   margin: 8px 0 0;
   line-height: 1.6;
+}
+
+/* The focus ring / toggle border above use a fixed rgba tied to the
+   light-mode primary; re-point them to the dark-mode primary here so
+   both themes feel intentional rather than just re-skinned. */
+body.dark input:focus,
+body.dark select:focus {
+  border-color: rgba(82, 215, 160, 0.45);
+  box-shadow: 0 0 0 4px rgba(82, 215, 160, 0.12);
+}
+
+body.dark .toggle-btn {
+  border-color: rgba(82, 215, 160, 0.55);
+}
+
+body.dark #addWorkoutBtn {
+  box-shadow: 0 12px 28px rgba(82, 215, 160, 0.18);
 }
 
 .undo-toast {
@@ -419,10 +504,6 @@ select:focus {
     padding-right: 18px;
   }
 
-  .stats {
-    grid-template-columns: 1fr;
-  }
-
   .days {
     grid-template-columns: 1fr;
     overflow: visible;
@@ -460,6 +541,20 @@ select:focus {
   .delete-btn {
     width: 44px;
     height: 44px;
+  }
+
+  .edit-btn {
+    width: 36px;
+    height: 36px;
+  }
+
+  .board-header {
+    flex-wrap: wrap;
+  }
+
+  .reset-btn {
+    width: 100%;
+    text-align: center;
   }
 
   /* Explicit 16px prevents iOS Safari from auto-zooming the page
